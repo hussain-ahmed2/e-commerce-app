@@ -23,7 +23,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${karlaSans.variable} antialiased`}>
 				<Header />
-				<main className="max-w-7xl min-h-[calc(100vh-3.1rem)] mx-auto">{children}</main>
+				<main className="max-w-7xl min-h-[calc(100vh-3.1rem)] mx-auto pt-16">{children}</main>
 				<Footer />
 			</body>
 		</html>
