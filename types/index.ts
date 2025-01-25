@@ -23,7 +23,7 @@ export interface Product {
 
 	minimumOrderQuantity: number;
 	price: number;
-    rating: number;
+	rating: number;
 	returnPolicy: string;
 	reviews: {
 		rating: number;
@@ -33,9 +33,9 @@ export interface Product {
 		reviewerEmail: string;
 	}[];
 	shippingInformation: string;
-    sku: string;
+	sku: string;
 	stock: number;
-    tags: string[];
+	tags: string[];
 	thumbnail: string;
 	title: string;
 	warrantyInformation: string;
@@ -54,6 +54,13 @@ export interface ProductListContextType {
 	error: boolean;
 	limit: number;
 	setLimit: Dispatch<SetStateAction<number>>;
+	activePage: number;
+	setActivePage: Dispatch<SetStateAction<number>>;
+	total: number;
+}
+
+export interface PaginationPropsType {
+	length: number;
 	activePage: number;
 	setActivePage: Dispatch<SetStateAction<number>>;
 }
