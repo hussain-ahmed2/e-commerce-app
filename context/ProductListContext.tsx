@@ -16,6 +16,7 @@ export function ProductListProvider({
 	const [error, setError] = useState<boolean>(false);
 	const [activePage, setActivePage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(20);
+	const [total, setTotal] = useState<number>(0);
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -23,6 +24,7 @@ export function ProductListProvider({
 			try {
 				const data = await getProducts(limit, (activePage - 1) * limit);
 				setProducts(data.products);
+				setTotal(data.total);
 			} catch (error) {
 				console.log(error);
 				setError(true);
@@ -43,6 +45,7 @@ export function ProductListProvider({
 				setLimit,
 				activePage,
 				setActivePage,
+				total
 			}}
 		>
 			{children}
