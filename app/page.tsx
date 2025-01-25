@@ -9,7 +9,7 @@ export default function Home() {
 	const {featuredProducts, loading, error} = useContext(HomeContext);
 
 	return (
-		<div className="container mx-auto max-w-7xl">
+		<div className="container mx-auto">
 			<header className="bg-neutral-600 text-white py-6 text-center">
 				<h1 className="text-4xl font-bold">
 					Welcome to Our E-Commerce Store
