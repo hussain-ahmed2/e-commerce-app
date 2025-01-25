@@ -1,45 +1,48 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface Product {
-	availabilityStatus: string;
-	brand: string;
-	category: string;
-	description: string;
-	dimensions: {
-		depth: number;
-		height: number;
-		width: number;
-	};
 
-	discountPercentage: number;
-	id: number;
-	images: string[];
-	meta: {
-		barcode: string;
-		createdAt: string;
-		qrCode: string;
-		updatedAt: string;
-	};
-
-	minimumOrderQuantity: number;
-	price: number;
+export interface Review {
 	rating: number;
-	returnPolicy: string;
-	reviews: {
-		rating: number;
-		comment: string;
-		reviewerName: string;
-		date: string;
-		reviewerEmail: string;
-	}[];
-	shippingInformation: string;
-	sku: string;
+	comment: string;
+	date: string;
+	reviewerName: string;
+	reviewerEmail: string;
+}
+
+export interface Meta {
+	createdAt: string;
+	updatedAt: string;
+	barcode: string;
+	qrCode: string;
+}
+
+export interface Product {
+	id: number;
+	title: string;
+	description: string;
+	category: string;
+	price: number;
+	discountPercentage: number;
+	rating: number;
 	stock: number;
 	tags: string[];
-	thumbnail: string;
-	title: string;
-	warrantyInformation: string;
+	brand: string;
+	sku: string;
 	weight: number;
+	dimensions: {
+		width: number;
+		height: number;
+		depth: number;
+	};
+	warrantyInformation: string;
+	shippingInformation: string;
+	availabilityStatus: string;
+	reviews: Review[];
+	returnPolicy: string;
+	minimumOrderQuantity: number;
+	meta: Meta;
+	images: string[];
+	thumbnail: string;
 }
 
 export interface HomeContextType {
