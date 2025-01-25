@@ -6,7 +6,11 @@ export const HomeContext = createContext<HomeContextType>(
 	{} as HomeContextType
 );
 
-export function HomeProvider({ children }: { children: ReactNode }) {
+export function HomeProvider({
+	children,
+}: Readonly<{
+	children: ReactNode;
+}>) {
 	const [featuredProducts, setFeaturedProducts] = useState<Product[] | []>(
 		[]
 	);
