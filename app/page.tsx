@@ -2,30 +2,11 @@
 import Error from "@/components/Error";
 import Loader from "@/components/Loader";
 import ProductCard from "@/components/ProductCard";
-import { getProducts } from "@/services/api";
-import { Product } from "@/types";
-import { useEffect, useState } from "react";
+import { HomeContext } from "@/context/HomeContext";
+import { useContext } from "react";
 
 export default function Home() {
-	const [products, setProducts] = useState<Product[] | []>([]);
-	const [loading, setLoading] = useState<boolean>(false);
-	const [error, setError] = useState<boolean>(false);
-
-	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				setLoading(true);
-				const data = await getProducts(8);
-				setProducts(data.products);
-			} catch (error) {
-        console.log(error);
-				setError(true);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchProducts();
-	}, []);
+	const {featuredProducts, loading, error} = useContext(HomeContext);
 
 	return (
 		<div className="container mx-auto max-w-7xl">
@@ -46,7 +27,7 @@ export default function Home() {
 					<Error message="Error Getting Products Data Please Refresh Your Browser." />
 				) : (
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-						{products.map((product) => (
+						{featuredProducts.map((product) => (
 							<ProductCard key={product.id} {...product} />
 						))}
 					</div>
