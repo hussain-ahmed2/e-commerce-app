@@ -2,13 +2,14 @@
 
 import Error from "@/components/Error";
 import Loader from "@/components/Loader";
+import Pagination from "@/components/Pagination";
 import ProductCard from "@/components/ProductCard";
 import { ProductListContext } from "@/context/ProductListContext";
 import { useContext } from "react";
 
 export default function ProductListPage() {
 
-    const {products, loading, error} = useContext(ProductListContext);
+    const {products, loading, error, activePage, setActivePage, total, limit} = useContext(ProductListContext);
 
     return (
 		<div className="container mx-auto">
@@ -19,23 +20,28 @@ export default function ProductListPage() {
 				</p>
 			</header>
 
-            <section className="py-8 px-5">
-                {loading ? (
+			<section className="py-8 px-5">
+				{loading ? (
 					<Loader />
 				) : error ? (
 					<Error message="Error fetching products" />
 				) : (
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-						{products.map((product) => (
-							<ProductCard key={product.id} {...product} />
-						))}
-					</div>
+					<>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+							{products.map((product) => (
+								<ProductCard key={product.id} {...product} />
+							))}
+						</div>
+						<div className="py-6">
+							<Pagination
+								activePage={activePage}
+								setActivePage={setActivePage}
+								length={Math.ceil(total / limit)}
+							/>
+						</div>
+					</>
 				)}
-            </section>
-
-			<div>
-				
-			</div>
+			</section>
 		</div>
 	);
 }
