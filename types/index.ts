@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface Product {
 	availabilityStatus: string;
 	brand: string;
@@ -44,4 +46,14 @@ export interface HomeContextType {
 	featuredProducts: Product[] | [];
 	loading: boolean;
 	error: boolean;
+}
+
+export interface ProductListContextType {
+	products: Product[] | [];
+	loading: boolean;
+	error: boolean;
+	limit: number;
+	setLimit: Dispatch<SetStateAction<number>>;
+	activePage: number;
+	setActivePage: Dispatch<SetStateAction<number>>;
 }
