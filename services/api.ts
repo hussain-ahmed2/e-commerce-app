@@ -10,7 +10,7 @@ export async function getProducts(limit: number = 10, skip: number = 0) {
 }
 
 // Get a single product by ID from the API
-export async function getProductById(id: string) {
+export async function getProductById(id: number) {
 	const { data } = await axios.get(`${BASE_URL}/${id}`);
 	return data;
 }
