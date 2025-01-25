@@ -2,6 +2,9 @@
 
 import { HomeProvider } from "@/context/HomeContext";
 import { ReactNode } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import { ProductListProvider } from "@/context/ProductListContext";
 
 export default function App({
 	children,
@@ -9,10 +12,14 @@ export default function App({
 	children: ReactNode;
 }>) {
 	return (
-		<HomeProvider>
-			<main className="max-w-7xl min-h-[calc(100vh-3.1rem)] mx-auto pt-16">
-				{children}
-			</main>
-		</HomeProvider>
+		<ProductListProvider>
+			<HomeProvider>
+				<Header />
+				<main className="max-w-7xl min-h-[calc(100vh-3.1rem)] mx-auto pt-16">
+					{children}
+				</main>
+				<Footer />
+			</HomeProvider>
+		</ProductListProvider>
 	);
 }
