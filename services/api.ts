@@ -22,7 +22,7 @@ export async function getProductsByCategory(
 	skip: number = 0
 ) {
 	const { data } = await axios.get(
-		`${BASE_URL}/products/category/${category}?limit=${limit}&skip=${skip}`
+		`${BASE_URL}/category/${category}?limit=${limit}&skip=${skip}`
 	);
 	return data;
 }
@@ -34,7 +34,7 @@ export async function getProductsBySearch(
 	skip: number = 0
 ) {
 	const { data } = await axios.get(
-		`${BASE_URL}/products/search?q=${query}&limit=${limit}&skip=${skip}`
+		`${BASE_URL}/search?q=${query}&limit=${limit}&skip=${skip}`
 	);
 	return data;
 }
