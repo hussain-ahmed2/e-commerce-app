@@ -39,3 +39,9 @@ export interface Product {
 	warrantyInformation: string;
 	weight: number;
 }
+
+export interface HomeContextType {
+	featuredProducts: Product[] | [];
+	loading: boolean;
+	error: boolean;
+}
