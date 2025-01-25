@@ -3,6 +3,7 @@ import { Karla } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import App from "@/components/App";
 
 const karlaSans = Karla({
 	variable: "--font-karla",
@@ -23,7 +24,9 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${karlaSans.variable} antialiased`}>
 				<Header />
-				<main className="max-w-7xl min-h-[calc(100vh-3.1rem)] mx-auto pt-16">{children}</main>
+				<App>
+					{ children }
+				</App>
 				<Footer />
 			</body>
 		</html>
