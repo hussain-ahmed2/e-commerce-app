@@ -1,7 +1,7 @@
 "use client";
 import Error from "@/components/Error";
 import Loader from "@/components/Loader";
-import ProductCard from "@/components/ProductCard";
+import ProductGrid from "@/components/ProductGrid";
 import { HomeContext } from "@/context/HomeContext";
 import { useContext } from "react";
 
@@ -26,11 +26,7 @@ export default function Home() {
 				) : error ? (
 					<Error message="Error Getting Products Data Please Refresh Your Browser." />
 				) : (
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-						{featuredProducts.map((product) => (
-							<ProductCard key={product.id} {...product} />
-						))}
-					</div>
+					<ProductGrid products={featuredProducts} />
 				)}
 			</section>
 

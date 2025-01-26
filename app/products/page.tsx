@@ -4,6 +4,7 @@ import Error from "@/components/Error";
 import Loader from "@/components/Loader";
 import Pagination from "@/components/Pagination";
 import ProductCard from "@/components/ProductCard";
+import ProductGrid from "@/components/ProductGrid";
 import SearchProducts from "@/components/SearchProducts";
 import { ProductListContext } from "@/context/ProductListContext";
 import { useContext } from "react";
@@ -32,11 +33,7 @@ export default function ProductListPage() {
 					<Error message="Error fetching products" />
 				) : (
 					<>
-						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-							{products.map((product) => (
-								<ProductCard key={product.id} {...product} />
-							))}
-						</div>
+						<ProductGrid products={products} />
 						<div className="py-6">
 							<Pagination
 								activePage={activePage}
