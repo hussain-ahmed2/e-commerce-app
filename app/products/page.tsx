@@ -3,7 +3,6 @@
 import Error from "@/components/Error";
 import Loader from "@/components/Loader";
 import Pagination from "@/components/Pagination";
-import ProductCard from "@/components/ProductCard";
 import ProductGrid from "@/components/ProductGrid";
 import SearchProducts from "@/components/SearchProducts";
 import { ProductListContext } from "@/context/ProductListContext";
