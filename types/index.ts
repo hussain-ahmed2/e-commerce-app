@@ -60,6 +60,8 @@ export interface ProductListContextType {
 	activePage: number;
 	setActivePage: Dispatch<SetStateAction<number>>;
 	total: number;
+	searchTerm: string;
+	setSearchTerm: Dispatch<SetStateAction<string>>;
 }
 
 export interface PaginationPropsType {
