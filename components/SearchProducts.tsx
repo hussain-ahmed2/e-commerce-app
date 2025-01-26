@@ -6,12 +6,20 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 export default function SearchProducts() {
 	const { searchTerm, setSearchTerm } = useContext(ProductListContext);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
+
 	return (
-		<form className="flex items-center justify-center max-w-lg mx-auto container">
+		<form onSubmit={handleSubmit} className="flex items-center justify-center max-w-lg mx-auto container">
 			<div className="w-full relative">
 				<input
 					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
+					onChange={handleChange}
 					className="p-2 rounded-s border w-full"
 					type="text"
 					name="search"
