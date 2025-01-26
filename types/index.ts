@@ -69,3 +69,33 @@ export interface PaginationPropsType {
 	activePage: number;
 	setActivePage: Dispatch<SetStateAction<number>>;
 }
+
+export interface Category {
+	slug: string;
+	name: string;
+	url: string;
+}
+
+export interface CategoryContextType {
+	categories: Category[] | [];
+	categoriesLoading: boolean;
+	categoriesError: boolean;
+	products: Product[] | [];
+	total: number;
+	category: Category | null;
+	setCategory: Dispatch<SetStateAction<Category | null>>;
+	limit: number;
+	setLimit: Dispatch<SetStateAction<number>>;
+	activePage: number;
+	setActivePage: Dispatch<SetStateAction<number>>;
+	categoryLoading: boolean;
+	categoryError: boolean;
+}
+
+export interface CategoriesSidebarPropsType {
+	categories: Category[] | [];
+	loading: boolean;
+	error: boolean;
+	selectedCategory: Category | null;
+	setSelectedCategory: Dispatch<SetStateAction<Category | null>>;
+}	
