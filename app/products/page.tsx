@@ -4,6 +4,7 @@ import Error from "@/components/Error";
 import Loader from "@/components/Loader";
 import Pagination from "@/components/Pagination";
 import ProductCard from "@/components/ProductCard";
+import SearchProducts from "@/components/SearchProducts";
 import { ProductListContext } from "@/context/ProductListContext";
 import { useContext } from "react";
 
@@ -19,6 +20,10 @@ export default function ProductListPage() {
 					Browse through our extensive product list
 				</p>
 			</header>
+
+			<div className="mt-6">
+				<SearchProducts />
+			</div>
 
 			<section className="py-8 px-5">
 				{loading ? (
