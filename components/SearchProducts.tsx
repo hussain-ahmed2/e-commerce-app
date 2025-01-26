@@ -4,11 +4,17 @@ import { FaTimes } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export default function SearchProducts() {
-	const { searchTerm, setSearchTerm } = useContext(ProductListContext);
+	const { searchTerm, setSearchTerm, setActivePage } = useContext(ProductListContext);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
+		setActivePage(1);
     };
+
+	const handleClose = () => {
+		setSearchTerm("");
+		setActivePage(1);
+	};
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,7 +33,7 @@ export default function SearchProducts() {
 					placeholder="Search Products..."
 				/>
 				{searchTerm && (
-					<FaTimes onClick={() => setSearchTerm("")} className="absolute w-8 h-8 p-2 top-1/2 right-0 -translate-x-1 -translate-y-1/2 cursor-pointer hover:bg-gray-200 rounded-full" />
+					<FaTimes onClick={handleClose} className="absolute w-8 h-8 p-2 top-1/2 right-0 -translate-x-1 -translate-y-1/2 cursor-pointer hover:bg-gray-200 rounded-full" />
 				)}
 			</div>
 			<button
