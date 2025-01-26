@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
@@ -27,20 +28,32 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
 
 	// Autoplay for image carousel
 	useEffect(() => {
-		const interval = setInterval(nextImage, 5000); // Change image every 3 seconds
+		const interval = setInterval(nextImage, 5000); // Change image every 5 seconds
 
 		return () => clearInterval(interval); // Clear interval when component unmounts
 	}, []); // Empty dependency array ensures the interval is set once when component mounts
 
 	return (
-		<div className="relative max-w-lg mx-auto aspect-square">
-			{/* Main Image Display */}
-			<img
-				src={images[currentImageIndex]}
-				alt="Product"
-				className="w-full h-auto rounded-lg shadow-lg transition-all duration-500"
-				loading="lazy" // Optimize image loading
-			/>
+		<div className="relative max-w-lg mx-auto aspect-square overflow-hidden">
+			{/* Carousel Container */}
+			<div
+				className="flex transition-transform duration-500"
+				style={{
+					transform: `translateX(-${currentImageIndex * 100}%)`,
+				}}
+			>
+				{images.map((image, index) => (
+					<Image
+						key={index}
+						src={image}
+						alt={`Slide ${index + 1}`}
+						className="w-full h-auto rounded-lg shadow-lg flex-shrink-0"
+						priority
+						width={300}
+						height={300}
+					/>
+				))}
+			</div>
 
 			{/* Navigation Buttons */}
 			<button
@@ -70,11 +83,13 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
 								: "border-transparent"
 						}`}
 					>
-						<img
+						<Image
 							src={image}
 							alt={`Thumbnail ${index}`}
 							className="w-full h-full object-cover rounded-md"
-							loading="lazy"
+							priority
+							width={50}
+							height={50}
 						/>
 					</div>
 				))}
