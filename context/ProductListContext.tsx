@@ -1,4 +1,5 @@
-import { getProducts } from "@/services/api";
+import useDebounce from "@/hooks/useDebounce";
+import { getProducts, getProductsBySearch } from "@/services/api";
 import { Product, ProductListContextType } from "@/types";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
@@ -17,12 +18,21 @@ export function ProductListProvider({
 	const [activePage, setActivePage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(20);
 	const [total, setTotal] = useState<number>(0);
+	const [searchTerm, setSearchTerm] = useState<string>("");
+
+	// Debounce the search term to reduce API calls
+	const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
 	useEffect(() => {
 		const fetchProducts = async () => {
 			setLoading(true);
+			let data = [];
 			try {
-				const data = await getProducts(limit, (activePage - 1) * limit);
+				if (debouncedSearchTerm) {
+					data = await getProductsBySearch(debouncedSearchTerm, limit, (activePage - 1) * limit);
+				} else {
+					data = await getProducts(limit, (activePage - 1) * limit);
+				}
 				setProducts(data.products);
 				setTotal(data.total);
 			} catch (error) {
@@ -33,7 +43,7 @@ export function ProductListProvider({
 			}
 		};
 		fetchProducts();
-	}, [activePage, limit]);
+	}, [activePage, limit, debouncedSearchTerm]);
 
 	return (
 		<ProductListContext.Provider
@@ -45,7 +55,9 @@ export function ProductListProvider({
 				setLimit,
 				activePage,
 				setActivePage,
-				total
+				total,
+				searchTerm,
+				setSearchTerm,
 			}}
 		>
 			{children}
