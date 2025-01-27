@@ -1,17 +1,17 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import Image from "next/image";
 
 export default function UserPage() {
-	const { user, cart } = useContext(AuthContext);
-	const [isClient, setIsClient] = useState(false);
+	const { user, cart, orderPlaced } = useContext(AuthContext);
 	const [isEditing, setIsEditing] = useState(false);
 	const [name, setName] = useState(user?.name || "");
 	const [email, setEmail] = useState(user?.email || "");
+	const [showOrders, setShowOrders] = useState(false);
 
 	const handleSave = () => {
 		// Update user details in context (you can implement a more complex update logic here)
@@ -20,18 +20,47 @@ export default function UserPage() {
 		setIsEditing(false);
 	};
 
-	useEffect(() => {
-		setIsClient(true); // Set client-side flag after the first render
-	}, []);
-
-	if (!isClient) return null; // Skip SSR render until after hydration
-
 	return (
 		<div className="container mx-auto p-8">
 			<div className="flex items-center gap-4">
 				<FaUserCircle className="text-4xl text-emerald-600" />
 				<h1 className="text-2xl font-semibold">User Profile</h1>
 			</div>
+
+			<div className="mt-6">
+				<button
+					onClick={() => setShowOrders((prev) => !prev)}
+					className="px-4 py-2 bg-emerald-600 text-white rounded-md"
+				>
+					Show Orders
+				</button>
+
+				{showOrders && (
+					<div className="mt-4">
+						<h2 className="text-xl font-semibold">Order History</h2>
+						<div className="flex flex-col gap-4">
+							{orderPlaced.map((order) => (
+								<div
+									key={order.id}
+									className="border p-4 rounded-md"
+								>
+									<p>
+										<strong>Order ID:</strong> {order.id}
+									</p>
+									<p>
+										<strong>Total:</strong> ${order.total}
+									</p>
+									<p>
+										<strong>Status:</strong> {order.status}
+									</p>
+									{/* Add more order details if needed */}
+								</div>
+							))}
+						</div>
+					</div>
+				)}
+			</div>
+
 
 			{user ? (
 				<div className="mt-6">
