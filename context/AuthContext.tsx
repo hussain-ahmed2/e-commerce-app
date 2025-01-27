@@ -1,4 +1,4 @@
-import { AuthContextType, Cart, Product, User } from "@/types";
+import { AuthContextType, Cart, Order, Product, User } from "@/types";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 export const AuthContext = createContext<AuthContextType>(
@@ -26,6 +26,11 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 	// Derive cart from the user object
 	const [cart, setCart] = useState<Cart[]>(() =>
 		user?.cart ? user.cart : []
+	);
+
+	// Orders placed by the user
+	const [orderPlaced, setOrderPlaced] = useState<Order[] | []>(() =>
+		user?.orderPlaced ? user.orderPlaced : []
 	);
 
 	// Function to handle user registration
@@ -136,6 +141,43 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 	};
 
+	const handleTotal = () => {
+		return cart.reduce((total, item) => {
+			const discountedPrice = (
+				item.product.price * (1 - item.product.discountPercentage / 100)
+			).toFixed(2);
+			return total + parseFloat(discountedPrice) * item.quantity;
+		}, 0);
+	};
+
+	const handlePlaceOrder = () => {
+		if (!user) return;
+
+		// Create a new order with the current date and the products in the cart
+		const newOrder = {
+			id: Date.now().toString(),
+			userId: user.id,
+			products: cart.map(({product, quantity}) => ({...product, quantity})),
+			total: handleTotal(),
+			status: "pending",
+		};
+
+		const updatedOrders = [...orderPlaced, newOrder];
+		setOrderPlaced(updatedOrders);
+
+		// Add the new order to the user's orderPlaced array
+		const updatedUser = { ...user, orderPlaced: updatedOrders };
+		setUser(updatedUser);
+
+		setUsers((prevUsers) =>
+			prevUsers.map((u) => (u.email === user.email ? updatedUser : u))
+		);
+
+		// Clear the cart
+		setCart([]);		
+	};
+
+
 	// Sync cart updates to the user object
 	useEffect(() => {
 		if (user) {
@@ -172,7 +214,10 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 				handleIncrement,
 				handleDecrement,
 				handleRemoveFromCart,
-				handleUserDataUpdate
+				handleUserDataUpdate,
+				handleTotal,
+				handlePlaceOrder,
+				orderPlaced
 			}}
 		>
 			{children}
