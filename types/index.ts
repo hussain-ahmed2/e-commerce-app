@@ -101,11 +101,21 @@ export interface CategoriesSidebarPropsType {
 }	
 
 export interface User {
-	id: string;
+	id: string | number;
 	name: string;
 	email: string;
 	password: string;
 	cart: Cart[];
+	orderPlaced: Order[] | [];
+}
+
+
+export interface Order {
+	id: string | number;
+	userId: string | number;
+	products: Product[];
+	total: number;
+	status: string;
 }
 
 export interface AuthContextType {
@@ -121,6 +131,9 @@ export interface AuthContextType {
 	handleIncrement: (id: number) => void;
 	handleDecrement: (id: number) => void;
 	handleUserDataUpdate: (name: string, email: string) => void;
+	handlePlaceOrder: () => void;
+	handleTotal: () => number;
+	orderPlaced: Order[];
 }
 
 export interface Cart {
