@@ -99,3 +99,32 @@ export interface CategoriesSidebarPropsType {
 	selectedCategory: Category | null;
 	setSelectedCategory: Dispatch<SetStateAction<Category | null>>;
 }	
+
+export interface User {
+	id: string;
+	name: string;
+	email: string;
+	password: string;
+	cart: Cart[];
+}
+
+export interface AuthContextType {
+	user: User | null;
+	setUser: Dispatch<SetStateAction<User | null>>;
+	handleRegister: (user: User) => boolean;
+	handleLogin: (email: string, password: string) => { email: boolean; password: boolean };
+	handleLogout: () => void;
+	cart: Cart[] | [];
+	setCart: Dispatch<SetStateAction<Cart[] | []>>;
+	handleAddToCart: (product: Product) => void;
+	handleRemoveFromCart: (id: number) => void;
+	handleIncrement: (id: number) => void;
+	handleDecrement: (id: number) => void;
+	handleUserDataUpdate: (name: string, email: string) => void;
+}
+
+export interface Cart {
+	id: number;
+	quantity: number;
+	product: Product;
+}
