@@ -21,7 +21,7 @@ export default function RegisterPage() {
 		event.preventDefault();
 		if (userData.confirmPassword === userData.password) {
 			setErrors(prev => ({...prev, password: false}));
-			const newUser = { id: userData.email, cart: [], ...userData };
+			const newUser = { id: userData.email, cart: [], orderPlaced: [], ...userData };
 			const res = handleRegister(newUser);
 
 			if (!res) {
