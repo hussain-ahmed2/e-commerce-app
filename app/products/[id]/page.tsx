@@ -1,19 +1,22 @@
 "use client";
 
-import { FaStar } from "react-icons/fa6";
+import { FaCheck, FaMinus, FaPlus, FaStar } from "react-icons/fa6";
 import Error from "@/components/Error";
 import Loader from "@/components/Loader";
 import { getProductById } from "@/services/api";
 import { Product } from "@/types";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ImageCarousel from "@/components/ImageCarousel";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function ProductPage() {
 	const { id } = useParams();
 	const [product, setProduct] = useState<Product | null>(null);
 	const [error, setError] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
+
+	const { handleAddToCart, cart, handleIncrement, handleDecrement } = useContext(AuthContext);
 
 	useEffect(() => {
 		if (!id) return;
@@ -118,9 +121,29 @@ export default function ProductPage() {
 					</div>
 
 					{/* Add to Cart Button */}
-					<button className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-all duration-300 w-full sm:w-auto">
-						Add to Cart
-					</button>
+					{
+						cart.some((item) => item.product.id === product.id) ? (
+							<div className="flex items-center gap-1">
+								<button onClick={() => handleDecrement(product.id)} className="h-10 w-10 flex justify-center items-center hover:bg-neutral-200 border">
+									<FaMinus />
+								</button>
+								<span className="h-10 w-10 flex justify-center items-center border">
+									{cart.find((item) => item.product.id === product.id)?.quantity}
+								</span>
+								<button onClick={() => handleIncrement(product.id)} className="h-10 w-10 flex justify-center items-center hover:bg-neutral-200 border">
+									<FaPlus />
+								</button>
+								<span className="text-green-600 flex items-center justify-center ms-4 gap-2"><FaCheck /> Added </span>
+							</div>
+						) : (
+							<button
+								className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+								onClick={() => handleAddToCart(product)}
+							>
+								Add to Cart
+							</button>
+						)
+					}
 				</div>
 			</div>
 
