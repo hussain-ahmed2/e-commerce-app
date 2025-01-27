@@ -77,7 +77,7 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
 					<div
 						key={index}
 						onClick={() => goToImage(index)}
-						className={`w-16 h-16 cursor-pointer border-2 rounded-md ${
+						className={`w-12 md:w-14 h-12 md:h-14 cursor-pointer border-2 rounded-md ${
 							index === currentImageIndex
 								? "border-green-600"
 								: "border-transparent"
