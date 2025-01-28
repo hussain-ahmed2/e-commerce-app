@@ -38,7 +38,7 @@ export default function Header() {
 					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700" href="/products/categories">Categories</Link>
 					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700" href="/cart">Cart</Link>
 					{isMounted ? (
-						<Link onClick={handleNavClose} className="max-md:hover:bg-green-700" href={`${user?.id ? "/user" : "/login"}`}>
+						<Link onClick={handleNavClose} className="max-md:hover:bg-green-700 self-center" href={`${user?.id ? "/user" : "/login"}`}>
 							{user?.id ? (
 								<div className="border rounded-full text-3xl p-1 hover:bg-white hover:text-emerald-600 relative group">
 									<FaUser className="p-1" />
@@ -47,7 +47,10 @@ export default function Header() {
 											User: {user?.name}
 										</p>
 										<button
-											onClick={handleLogout}
+											onClick={event => {
+												event.stopPropagation();
+												handleLogout();
+											}}
 											className="text-sm text-emerald-600 hover:text-emerald-700"
 										>
 											Logout
