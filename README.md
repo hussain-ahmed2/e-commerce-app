@@ -11,6 +11,10 @@ This is a basic e-commerce app built with Next.js, TypeScript, and Tailwind CSS.
 * User profile with order history and personal details management
 * Responsive design for mobile and desktop
 
+## Live Demo
+
+You can view a live demo of the app at [https://e-commerce-shop-by-hussain.netlify.app](https://e-commerce-shop-by-hussain.netlify.app).
+
 ## Getting Started
 
 1. Clone the repository and install the dependencies with `npm install` or `yarn install`.
@@ -30,3 +34,4 @@ This is a basic e-commerce app built with Next.js, TypeScript, and Tailwind CSS.
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
