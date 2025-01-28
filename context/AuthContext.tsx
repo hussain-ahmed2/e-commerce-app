@@ -1,4 +1,5 @@
 import { AuthContextType, Cart, Order, Product, User } from "@/types";
+import { redirect } from "next/navigation";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 export const AuthContext = createContext<AuthContextType>(
@@ -72,6 +73,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 	const handleLogout = (): void => {
 		setUser(null);
 		setCart([]);
+		redirect('/login');
 	};
 
 	// Function to handle user data update
