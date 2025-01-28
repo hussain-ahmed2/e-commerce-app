@@ -1,7 +1,7 @@
 import { CategoriesSidebarPropsType, Category } from "@/types";
 import Error from "./Error";
 import Loader from "./Loader";
-import { FaBars } from "react-icons/fa6";
+import { FaAngleDown } from "react-icons/fa6";
 import { useState } from "react";
 
 export default function CategoriesSidebar({
@@ -27,7 +27,7 @@ export default function CategoriesSidebar({
 					selected: <span className="font-bold text-emerald-500">{selectedCategory?.name}</span>
 				</div>
 				<button onClick={handleToggle} className="md:hidden text-xl">
-					<FaBars />
+					<FaAngleDown className={`${isOpen ? "rotate-180": 'rotate-0'} transition`} />
 				</button>
 			</div>
 			<ul className={`space-y-2 md:max-h-[90vh] overflow-y-auto transition-all duration-300 ${  isOpen ? "max-h-[50vh]" : "max-h-0"}`}>
