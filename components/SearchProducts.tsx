@@ -6,16 +6,19 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 export default function SearchProducts() {
 	const { searchTerm, setSearchTerm, setActivePage } = useContext(ProductListContext);
 
+    // Handle input change
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
 		setActivePage(1);
     };
 
+    // Clear search input
 	const handleClose = () => {
 		setSearchTerm("");
 		setActivePage(1);
 	};
 
+    // Prevent default form submission
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     };
@@ -45,3 +48,4 @@ export default function SearchProducts() {
 		</form>
 	);
 }
+

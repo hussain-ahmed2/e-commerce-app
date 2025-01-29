@@ -18,6 +18,7 @@ export default function CategoriesListPage() {
 			</header>
 
 			<div className="flex flex-col md:flex-row">
+				{/* This section renders the categories sidebar */}
 				<div className="w-full min-h-14 md:w-1/4 relative z-10">
 					<CategoriesSidebar
 						categories={categories}
@@ -27,6 +28,8 @@ export default function CategoriesListPage() {
 						error={categoriesError}
 					/>
 				</div>
+
+				{/* This section renders the products grid */}
 				<main className="md:w-3/4 bg-white p-4">
 					{categoryLoading ? (
 						<Loader />
@@ -39,6 +42,7 @@ export default function CategoriesListPage() {
 							</h2>
 							<div className="w-full h-full flex flex-col justify-between pb-6">
 								<ProductGrid products={products} />
+								{/* This section renders the pagination */}
 								<div className="py-6">
 									<Pagination
 										activePage={activePage}

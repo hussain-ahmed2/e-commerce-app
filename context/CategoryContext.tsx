@@ -11,17 +11,18 @@ export function CategoryProvider({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const [category, setCategory] = useState<Category | null>(null);
-	const [categories, setCategories] = useState<Category[] | []>([]);
-	const [categoriesLoading, setCategoriesLoading] = useState<boolean>(false);
-	const [categoryLoading, setCategoryLoading] = useState<boolean>(false);
-	const [categoriesError, setCategoriesError] = useState<boolean>(false);
-	const [categoryError, setCategoryError] = useState<boolean>(false);
-	const [products, setProducts] = useState<Product[] | []>([]);
-	const [total, setTotal] = useState<number>(0);
-	const [limit, setLimit] = useState<number>(20);
-	const [activePage, setActivePage] = useState<number>(1);
+	const [category, setCategory] = useState<Category | null>(null); // Selected category
+	const [categories, setCategories] = useState<Category[] | []>([]); // All categories
+	const [categoriesLoading, setCategoriesLoading] = useState<boolean>(false); // Loading state
+	const [categoryLoading, setCategoryLoading] = useState<boolean>(false); // Loading state
+	const [categoriesError, setCategoriesError] = useState<boolean>(false); // Error state
+	const [categoryError, setCategoryError] = useState<boolean>(false); // Error state
+	const [products, setProducts] = useState<Product[] | []>([]); // Products
+	const [total, setTotal] = useState<number>(0); // Total
+	const [limit, setLimit] = useState<number>(20); // Limit
+	const [activePage, setActivePage] = useState<number>(1); // Active page
 
+	// Fetch categories
 	useEffect(() => {
 		setCategoriesLoading(true);
 		const fetchCategories = async () => {
@@ -39,6 +40,7 @@ export function CategoryProvider({
 		fetchCategories();
 	}, []);
 
+	// Fetch products
 	useEffect(() => {
 		setCategoryLoading(true);
 		const fetchProducts = async () => {

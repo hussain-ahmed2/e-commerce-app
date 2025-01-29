@@ -4,18 +4,24 @@ import { useContext, useEffect, useState } from "react";
 import { FaBars, FaUser } from "react-icons/fa6";
 
 export default function Header() {
+	// Context
 	const { user, handleLogout } = useContext(AuthContext);
+	// State
 	const [isMounted, setIsMounted] = useState(false);
+	// Navigation
 	const [open, setOpen] = useState(false);
 
+	// Handlers
 	const handleNavClose = () => {
 		setOpen(false);
 	}
 
+	// Handlers
 	const handleNavToggle = () => {
 		setOpen(prev => !prev);
 	}
 
+	// Effects
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);

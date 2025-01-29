@@ -5,9 +5,10 @@ import { FaCreditCard } from "react-icons/fa6";
 import Image from "next/image";
 
 const CheckoutPage = () => {
-	const { cart, handleTotal, handlePlaceOrder } = useContext(AuthContext);
-	const [showModal, setShowModal] = useState(false);
+	const { cart, handleTotal, handlePlaceOrder } = useContext(AuthContext); // Context 
+	const [showModal, setShowModal] = useState(false); // State for modal
 
+	// cart is empty
 	if (cart.length === 0) {
 		return (
 			<div className="container mx-auto p-8">
@@ -19,6 +20,7 @@ const CheckoutPage = () => {
 		);
 	}
 
+	// cart is not empty
 	return (
 		<div className="container mx-auto p-8">
 			<h1 className="text-2xl font-bold mb-6">Checkout</h1>

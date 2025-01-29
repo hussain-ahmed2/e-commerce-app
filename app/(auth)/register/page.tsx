@@ -6,17 +6,18 @@ import Link from "next/link";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 
 export default function RegisterPage() {
-	const [userData, setUserData] = useState({
+	const [userData, setUserData] = useState({ // state to store user data
 		name: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
 	});
 
-	const [errors, setErrors] = useState({ email: false, password: false });
+	const [errors, setErrors] = useState({ email: false, password: false }); // state to store errors
 
-	const { user, handleRegister } = useContext(AuthContext);
+	const { user, handleRegister } = useContext(AuthContext); // context
 
+	// handle form submission
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
 		if (userData.confirmPassword === userData.password) {
@@ -38,6 +39,7 @@ export default function RegisterPage() {
 		}
 	};
 
+	// handle input change
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setUserData((prev) => ({
 			...prev,
@@ -45,6 +47,7 @@ export default function RegisterPage() {
 		}));
 	};
 
+	// redirect to home page if user is logged in
 	useEffect(() => {
 		if (user?.email) redirect("/");
 	}, [user]);

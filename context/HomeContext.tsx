@@ -11,12 +11,13 @@ export function HomeProvider({
 }: Readonly<{
 	children: ReactNode;
 }>) {
-	const [featuredProducts, setFeaturedProducts] = useState<Product[] | []>(
+	const [featuredProducts, setFeaturedProducts] = useState<Product[] | []>( // Featured products
 		[]
 	);
-	const [loading, setLoading] = useState<boolean>(false);
-	const [error, setError] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false); // Loading state
+	const [error, setError] = useState<boolean>(false); // Error state
 
+	// Fetch featured products
 	useEffect(() => {
 		const fetchProducts = async () => {
 			try {

@@ -12,17 +12,18 @@ export function ProductListProvider({
 }: Readonly<{
 	children: ReactNode;
 }>) {
-	const [products, setProducts] = useState<Product[] | []>([]);
-	const [loading, setLoading] = useState<boolean>(false);
-	const [error, setError] = useState<boolean>(false);
-	const [activePage, setActivePage] = useState<number>(1);
-	const [limit, setLimit] = useState<number>(20);
-	const [total, setTotal] = useState<number>(0);
-	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [products, setProducts] = useState<Product[] | []>([]); // Products
+	const [loading, setLoading] = useState<boolean>(false); // Loading state
+	const [error, setError] = useState<boolean>(false); // Error state
+	const [activePage, setActivePage] = useState<number>(1); // Active page
+	const [limit, setLimit] = useState<number>(20); // Limit
+	const [total, setTotal] = useState<number>(0); // Total
+	const [searchTerm, setSearchTerm] = useState<string>(""); // Search term
 
 	// Debounce the search term to reduce API calls
-	const debouncedSearchTerm = useDebounce(searchTerm, 500);
+	const debouncedSearchTerm = useDebounce(searchTerm, 500); 
 
+	// Fetch products
 	useEffect(() => {
 		const fetchProducts = async () => {
 			setLoading(true);

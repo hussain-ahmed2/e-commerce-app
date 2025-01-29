@@ -8,20 +8,24 @@ interface ImageCarouselProps {
 }
 
 const ImageCarousel = ({ images }: ImageCarouselProps) => {
+	// State to track the current image index
 	const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
+	// Functions to handle image navigation
 	const nextImage = () => {
 		setCurrentImageIndex((prevIndex) =>
 			prevIndex === images.length - 1 ? 0 : prevIndex + 1
 		);
 	};
 
+	// Function to handle image navigation
 	const prevImage = () => {
 		setCurrentImageIndex((prevIndex) =>
 			prevIndex === 0 ? images.length - 1 : prevIndex - 1
 		);
 	};
 
+	// Function to handle image navigation
 	const goToImage = (index: number) => {
 		setCurrentImageIndex(index);
 	};

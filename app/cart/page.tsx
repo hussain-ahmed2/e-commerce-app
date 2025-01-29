@@ -7,8 +7,10 @@ import Image from "next/image";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
 
 export default function CartPage() {
-	const { cart, handleRemoveFromCart, handleIncrement, handleDecrement } =
+	// Context
+	const { cart, handleRemoveFromCart, handleIncrement, handleDecrement, handleTotal } =
 		useContext(AuthContext);
+	// State
 	const [isClient, setIsClient] = useState(false);
 
 	useEffect(() => {
@@ -19,22 +21,13 @@ export default function CartPage() {
 		return null; // Prevent rendering until after client-side hydration
 	}
 
-	const handleTotal = () => {
-		return cart.reduce((total, item) => {
-			const discountedPrice = (
-				item.product.price *
-				(1 - item.product.discountPercentage / 100)
-			).toFixed(2);
-			return total + parseFloat(discountedPrice) * item.quantity;
-		}, 0);
-	};
-
 	return (
 		<div className="container mx-auto p-8">
 			<h1 className="text-2xl font-bold mb-6">Your Cart</h1>
 
 			{cart.length === 0 ? (
-				<div className="text-center">
+				// If cart is empty show this
+				<div className="text-center"> 
 					<p>Your cart is empty!</p>
 					<Link href="/products">
 						<span className="text-emerald-600 hover:text-emerald-800">
@@ -43,6 +36,7 @@ export default function CartPage() {
 					</Link>
 				</div>
 			) : (
+				// if cart is not empty show this
 				<div>
 					<div className="flex flex-col gap-4">
 						{cart.map((item) => {

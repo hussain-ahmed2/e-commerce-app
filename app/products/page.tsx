@@ -21,10 +21,12 @@ export default function ProductListPage() {
 				</p>
 			</header>
 
+			{/* This section renders the search functionality */}
 			<div className="mt-6">
 				<SearchProducts />
 			</div>
 
+			{/* This section renders the product grid */}
 			<section className="py-8 px-5">
 				{loading ? (
 					<Loader />

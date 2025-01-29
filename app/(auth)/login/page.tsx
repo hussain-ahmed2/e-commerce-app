@@ -6,10 +6,11 @@ import { redirect } from "next/navigation";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 
 export default function LoginPage() {
-    const [userData, setUserData] = useState({email: '', password: ''});
-	const [errors, setErrors] = useState({ email: false, password: false });
-    const { handleLogin, user } = useContext(AuthContext);
+    const [userData, setUserData] = useState({email: '', password: ''}); // state to store user data
+	const [errors, setErrors] = useState({ email: false, password: false }); // state to store errors
+    const { handleLogin, user } = useContext(AuthContext); // context
 
+	// handle form submission
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         const status = handleLogin(userData.email, userData.password);
@@ -19,10 +20,12 @@ export default function LoginPage() {
 		if(!status.email && !status.password) redirect('/user');
     }
 
+	// handle input change
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUserData(prev => ({...prev, [event.target.name]: event.target.value}));
     }
 
+	// redirect if user is logged in
     useEffect(() => {
         if (user?.email) redirect('/');
     }, [user])

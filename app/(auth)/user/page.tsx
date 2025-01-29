@@ -7,15 +7,14 @@ import { FaUserCircle } from "react-icons/fa";
 import Image from "next/image";
 
 export default function UserPage() {
-	const { user, cart, orderPlaced } = useContext(AuthContext);
-	const [isEditing, setIsEditing] = useState(false);
-	const [name, setName] = useState(user?.name || "");
-	const [email, setEmail] = useState(user?.email || "");
-	const [showOrders, setShowOrders] = useState(false);
+	const { user, cart, orderPlaced } = useContext(AuthContext); // Access user context
+	const [isEditing, setIsEditing] = useState(false); // State for editing
+	const [name, setName] = useState(user?.name || ""); // State for name
+	const [email, setEmail] = useState(user?.email || ""); // State for email
+	const [showOrders, setShowOrders] = useState(false); // State for showing orders
 
-	const handleSave = () => {
-		// Update user details in context (you can implement a more complex update logic here)
-        
+	// Function to handle saving user details
+	const handleSave = () => {       
 		console.log("Saving user details...", { name, email });
 		setIsEditing(false);
 	};
@@ -35,6 +34,7 @@ export default function UserPage() {
 					Show Orders
 				</button>
 
+				{/* Display order history */}
 				{showOrders && (
 					<div className="mt-4">
 						<h2 className="text-xl font-semibold">Order History</h2>
@@ -53,7 +53,6 @@ export default function UserPage() {
 									<p>
 										<strong>Status:</strong> {order.status}
 									</p>
-									{/* Add more order details if needed */}
 								</div>
 							))}
 						</div>

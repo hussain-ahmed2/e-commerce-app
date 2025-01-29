@@ -8,22 +8,26 @@ export default function Pagination({
 }: PaginationPropsType) {
 	const pages: number[] = Array.from({ length }, (_, index) => index + 1);
 
-	const handlePageChange = (page: number) => {
+	// Function to handle page change
+	const handlePageChange = (page: number) => { 
 		setActivePage(page);
 	};
 
+	// Function to handle previous and next page
 	const handlePrevPage = () => {
 		if (activePage > 1) {
 			setActivePage((prevPage) => prevPage - 1);
 		}
 	};
 
+	// Function to handle previous and next page
 	const handleNextPage = () => {
 		if (activePage < length) {
 			setActivePage((prevPage) => prevPage + 1);
 		}
 	};
 
+	// Function to get responsive visibility class
 	const getResponsiveVisibilityClass = (
 		page: number,
 		activePage: number,
@@ -73,3 +77,6 @@ export default function Pagination({
 		</div>
 	);
 }
+
+
+

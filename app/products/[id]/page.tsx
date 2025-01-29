@@ -11,13 +11,19 @@ import ImageCarousel from "@/components/ImageCarousel";
 import { AuthContext } from "@/context/AuthContext";
 
 export default function ProductPage() {
+	// Get the product ID from the URL
 	const { id } = useParams();
+	// State to hold the product data
 	const [product, setProduct] = useState<Product | null>(null);
+	// State to hold the error message
 	const [error, setError] = useState<boolean>(false);
+	// State to hold the loading state
 	const [loading, setLoading] = useState<boolean>(false);
 
+	// Context
 	const { handleAddToCart, cart, handleIncrement, handleDecrement } = useContext(AuthContext);
 
+	// Fetch the product data
 	useEffect(() => {
 		if (!id) return;
 
@@ -37,10 +43,12 @@ export default function ProductPage() {
 		fetchProduct();
 	}, [id]);
 
+	// if loading show loader
 	if (loading) {
 		return <Loader />;
 	}
 
+	// if error show error
 	if (error || !product) {
 		return (
 			<Error message="Something went wrong. Please try again later." />

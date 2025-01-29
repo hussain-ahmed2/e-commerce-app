@@ -6,6 +6,7 @@ import { HomeContext } from "@/context/HomeContext";
 import { useContext } from "react";
 
 export default function Home() {
+	// Context
 	const {featuredProducts, loading, error} = useContext(HomeContext);
 
 	return (
@@ -19,6 +20,7 @@ export default function Home() {
 				</p>
 			</header>
 
+			{/* Home page hero section will go here in the future */}
 			<section className="py-8 px-5">
 				<h2 className="text-2xl font-bold mb-4">Featured Products</h2>
 				{loading ? (

@@ -7,7 +7,7 @@ export const AuthContext = createContext<AuthContextType>(
 );
 
 export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
-	const [users, setUsers] = useState<User[]>(() => {
+	const [users, setUsers] = useState<User[]>(() => { // Initialize users from local storage
 		try {
 			return JSON.parse(localStorage.getItem("users") || "[]") as User[];
 		} catch {
@@ -15,7 +15,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 		}
 	});
 
-	const [user, setUser] = useState<User | null>(() => {
+	const [user, setUser] = useState<User | null>(() => { // Initialize user from local storage
 		try {
 			const storedUser = localStorage.getItem("user");
 			return storedUser ? (JSON.parse(storedUser) as User) : null;
@@ -112,6 +112,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 		});
 	};
 
+	// Functions to handle cart operations
 	const handleIncrement = (id: number) => {
 		setCart((prevCart) =>
 			prevCart.map((item) =>
@@ -120,6 +121,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 		);
 	};
 
+	// Functions to handle cart operations
 	const handleDecrement = (id: number) => {
 		setCart(
 			(prevCart) =>
@@ -139,10 +141,12 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 		);
 	};
 
+	// Functions to handle cart operations
 	const handleRemoveFromCart = (id: number) => {
 		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 	};
 
+	// Function to handle cart total
 	const handleTotal = () => {
 		return cart.reduce((total, item) => {
 			const discountedPrice = (
@@ -152,6 +156,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 		}, 0);
 	};
 
+	// Function to handle order placement
 	const handlePlaceOrder = () => {
 		if (!user) return;
 
@@ -198,6 +203,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 		localStorage.setItem("user", JSON.stringify(user));
 	}, [user]);
 
+	// Persist `users` to localStorage whenever it changes
 	useEffect(() => {
 		localStorage.setItem("users", JSON.stringify(users));
 	}, [users]);

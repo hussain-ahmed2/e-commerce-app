@@ -11,11 +11,16 @@ export default function CategoriesSidebar({
 	selectedCategory,
 	setSelectedCategory,
 }: CategoriesSidebarPropsType) {
+	// Handle Category Selection
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	// Handle Category Selection
 	const handleCategoryChange = (category: Category) => {
 		setSelectedCategory(category);
 		setIsOpen(false);
 	};
+
+	// Handle Toggle
 	const handleToggle = () => {
 		setIsOpen(!isOpen);
 	};
