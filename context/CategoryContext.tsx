@@ -11,7 +11,7 @@ export function CategoryProvider({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const [category, setCategory] = useState<Category | null>(null); // Selected category
+	const [category, setCategory] = useState<Category>({ slug: "", name: "", url: "" }); // Selected category
 	const [categories, setCategories] = useState<Category[] | []>([]); // All categories
 	const [categoriesLoading, setCategoriesLoading] = useState<boolean>(false); // Loading state
 	const [categoryLoading, setCategoryLoading] = useState<boolean>(false); // Loading state
