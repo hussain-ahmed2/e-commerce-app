@@ -6,10 +6,19 @@ import Loader from "@/components/Loader";
 import Pagination from "@/components/Pagination";
 import ProductGrid from "@/components/ProductGrid";
 import { CategoryContext } from "@/context/CategoryContext";
+import { Category } from "@/types";
 import { useContext } from "react";
 
 export default function CategoriesListPage() {
     const { categories, category, setCategory, categoriesLoading, categoriesError, products, total, limit, activePage, setActivePage, categoryError, categoryLoading } = useContext(CategoryContext);
+
+	function setSelectedCategory(newCategory: Category) {
+		if (category.slug !== newCategory.slug) {
+			setActivePage(1);
+		}
+		setCategory(newCategory);
+	}
+	
     return (
 		<div className="container mx-auto">
 			<header className="bg-neutral-600 text-white py-6 text-center">
@@ -23,7 +32,7 @@ export default function CategoriesListPage() {
 					<CategoriesSidebar
 						categories={categories}
 						selectedCategory={category}
-						setSelectedCategory={setCategory}
+						setSelectedCategory={setSelectedCategory}
 						loading={categoriesLoading}
 						error={categoriesError}
 					/>
