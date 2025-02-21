@@ -82,8 +82,8 @@ export interface CategoryContextType {
 	categoriesError: boolean;
 	products: Product[] | [];
 	total: number;
-	category: Category | null;
-	setCategory: Dispatch<SetStateAction<Category | null>>;
+	category: Category;
+	setCategory: Dispatch<SetStateAction<Category>>;
 	limit: number;
 	setLimit: Dispatch<SetStateAction<number>>;
 	activePage: number;
@@ -96,8 +96,8 @@ export interface CategoriesSidebarPropsType {
 	categories: Category[] | [];
 	loading: boolean;
 	error: boolean;
-	selectedCategory: Category | null;
-	setSelectedCategory: Dispatch<SetStateAction<Category | null>>;
+	selectedCategory: Category;
+	setSelectedCategory: (category: Category) => void;
 }	
 
 export interface User {
