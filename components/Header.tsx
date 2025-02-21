@@ -39,12 +39,12 @@ export default function Header() {
 				<div
 					className={`flex md:items-center md:justify-center md:gap-8 max-md:flex-col max-md:absolute max-md:bg-green-600 max-md:w-full max-md:top-14 max-md:left-0 max-md:py-10 max-md:*:py-3 text-center transform transition ${open ? "max-md:translate-x-0" : "max-md:translate-x-full"}`}
 				>
-					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700" href="/">Home</Link>
-					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700" href="/products">Products</Link>
-					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700" href="/products/categories">Categories</Link>
-					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700" href="/cart">Cart</Link>
+					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700 hover:underline" href="/">Home</Link>
+					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700 hover:underline" href="/products">Products</Link>
+					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700 hover:underline" href="/products/categories">Categories</Link>
+					<Link onClick={handleNavClose} className="max-md:hover:bg-green-700 hover:underline" href="/cart">Cart</Link>
 					{isMounted ? (
-						<Link onClick={handleNavClose} className="max-md:hover:bg-green-700 self-center" href={`${user?.id ? "/user" : "/login"}`}>
+						<Link onClick={handleNavClose} className="max-md:hover:bg-green-700 self-center hover:underline" href={`${user?.id ? "/user" : "/login"}`}>
 							{user?.id ? (
 								<div className="border rounded-full text-3xl p-1 hover:bg-white hover:text-emerald-600 relative group">
 									<FaUser className="p-1" />
