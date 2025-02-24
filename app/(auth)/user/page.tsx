@@ -5,6 +5,7 @@ import { AuthContext } from "@/context/AuthContext";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function UserPage() {
 	const { user, cart, orderPlaced } = useContext(AuthContext); // Access user context
@@ -18,6 +19,8 @@ export default function UserPage() {
 		console.log("Saving user details...", { name, email });
 		setIsEditing(false);
 	};
+
+	if (!user.id) redirect("/login");
 
 	return (
 		<div className="container mx-auto p-8">
