@@ -1,3 +1,4 @@
+import useLocalstorage from "@/hooks/useLocalstorage";
 import { AuthContextType, Cart, Order, Product, User } from "@/types";
 import { redirect } from "next/navigation";
 import { createContext, ReactNode, useEffect, useState } from "react";
@@ -7,22 +8,9 @@ export const AuthContext = createContext<AuthContextType>(
 );
 
 export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
-	const [users, setUsers] = useState<User[]>(() => { // Initialize users from local storage
-		try {
-			return JSON.parse(localStorage.getItem("users") || "[]") as User[];
-		} catch {
-			return [];
-		}
-	});
+	const [users, setUsers] = useLocalstorage("users", [] as User[]);
 
-	const [user, setUser] = useState<User | null>(() => { // Initialize user from local storage
-		try {
-			const storedUser = localStorage.getItem("user");
-			return storedUser ? (JSON.parse(storedUser) as User) : null;
-		} catch {
-			return null;
-		}
-	});
+	const [user, setUser] = useLocalstorage("user", {} as User);
 
 	// Derive cart from the user object
 	const [cart, setCart] = useState<Cart[]>(() =>
@@ -71,7 +59,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 
 	// Function to handle user logout
 	const handleLogout = (): void => {
-		setUser(null);
+		setUser({} as User);
 		setCart([]);
 		redirect('/login');
 	};
