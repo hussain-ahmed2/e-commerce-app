@@ -119,8 +119,8 @@ export interface Order {
 }
 
 export interface AuthContextType {
-	user: User | null;
-	setUser: Dispatch<SetStateAction<User | null>>;
+	user: User;
+	setUser: Dispatch<SetStateAction<User>>;
 	handleRegister: (user: User) => boolean;
 	handleLogin: (email: string, password: string) => { email: boolean; password: boolean };
 	handleLogout: () => void;
